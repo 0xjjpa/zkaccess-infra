@@ -46,14 +46,15 @@ jobs:
         working-directory: ./.github/config/ceramic-aws-node
         run: terraform -chdir=${{ env.CONFIG_WORKSPACE }} init
 
-      - name: Terrafom Apply
-        working-directory: ./.github/config/ceramic-aws-node
-        run: terraform -chdir=${{ env.CONFIG_WORKSPACE }} apply -auto-approve
-        env:
-          TF_VAR_ceramic_bucket_name: ${{ env.CERAMIC_BUCKET_NAME }}
-          TF_VAR_ipfs_bucket_name: ${{ env.IPFS_BUCKET_NAME }}
-          TF_VAR_ceramic_network: ${{ inputs.ceramic-network }}
-          TF_VAR_ansible_public_key: ${{ secrets.ANSIBLE_PUBLIC_KEY }}
+      # TODO: Ensure this only runs if infra has not been setup.
+      # - name: Terrafom Apply
+      #  working-directory: ./.github/config/ceramic-aws-node
+      #  run: terraform -chdir=${{ env.CONFIG_WORKSPACE }} apply -auto-approve
+      #  env:
+      #    TF_VAR_ceramic_bucket_name: ${{ env.CERAMIC_BUCKET_NAME }}
+      #    TF_VAR_ipfs_bucket_name: ${{ env.IPFS_BUCKET_NAME }}
+      #    TF_VAR_ceramic_network: ${{ inputs.ceramic-network }}
+      #    TF_VAR_ansible_public_key: ${{ secrets.ANSIBLE_PUBLIC_KEY }}
 
       - name: Decrypt large secret
         working-directory: ./.github/config
